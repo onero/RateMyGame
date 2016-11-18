@@ -91,4 +91,13 @@ public class RateMyGameMainViewController implements Initializable {
             txtRate.setText("");
         }
     }
+    
+    /**
+     * Clears the ratings List.
+     * @param event 
+     */
+    public void handleClearRatingList(ActionEvent event)
+    {
+        gameModel.clearRatings();
+    }
 }

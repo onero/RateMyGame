@@ -35,5 +35,12 @@ public class GameModel {
     public void addGameToRatings(Game gameToAdd) {
         ratings.add(gameToAdd);
     }
-
+    
+    /**
+     * Clears the ratings List.
+     */
+    public void clearRatings()
+    {
+        ratings.clear();
+    }
 }
