@@ -24,8 +24,9 @@ public class GameRatingManager {
      * @param games
      * @return
      */
-    public Game getHighestRating(ArrayList<Game> games) {
+    public ArrayList<Game> getHighestRating(ArrayList<Game> games) {
         Game highestGame = null;
+        ArrayList<Game> highGames = new ArrayList<>();
         double highestGameRating = -1;
         for (Game currentGame : games) {
             if (currentGame.getRating() > highestGameRating) {
@@ -33,7 +34,12 @@ public class GameRatingManager {
                 highestGameRating = currentGame.getRating();
             }
         }
-        return highestGame;
+        for (Game currentGame : games) {
+            if (currentGame.getRating() == highestGame.getRating()) {
+                highGames.add(currentGame);
+            }
+        }
+        return highGames;
     }
 
     /**
@@ -42,8 +48,9 @@ public class GameRatingManager {
      * @param games
      * @return
      */
-    public Game getLowestRating(ArrayList<Game> games) {
+    public ArrayList<Game> getLowestRating(ArrayList<Game> games) {
         Game highestGame = null;
+        ArrayList<Game> lowGames = new ArrayList<>();
         double highestGameRating = 100;
         for (Game currentGame : games) {
             if (currentGame.getRating() < highestGameRating) {
@@ -51,7 +58,12 @@ public class GameRatingManager {
                 highestGameRating = currentGame.getRating();
             }
         }
-        return highestGame;
+        for (Game currentGame : games) {
+            if (currentGame.getRating() == highestGame.getRating()) {
+                lowGames.add(currentGame);
+            }
+        }
+        return lowGames;
     }
 
     /**

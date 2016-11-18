@@ -6,6 +6,7 @@
 package ratemygame.gui.controller;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -99,10 +100,18 @@ public class RateMyGameMainViewController implements Initializable {
      * Updates highest, lowest and average score
      */
     private void getMeanRatings() {
-        Game highestGame = gameRatingManager.getHighestRating(gameModel.getGameRatings());
-        txtHighestRated.setText(gameModel.getHighestGameAsString(highestGame));
-        Game lowestGame = gameRatingManager.getLowestRating(gameModel.getGameRatings());
-        txtLowestRated.setText(gameModel.getLowestGameAsString(lowestGame));
+        ArrayList<Game> highestGames = gameRatingManager.getHighestRating(gameModel.getGameRatings());
+        ArrayList<Game> lowestGames = gameRatingManager.getLowestRating(gameModel.getGameRatings());
+        if (highestGames.size() > 1) {
+            txtHighestRated.setText(highestGames.size() + " games with the rating of " + highestGames.get(0).getRating());
+        } else {
+            txtHighestRated.setText(gameModel.getHighestGameAsString(highestGames.get(0)));
+        }
+        if (lowestGames.size() > 1) {
+            txtLowestRated.setText(lowestGames.size() + " games with the rating of " + lowestGames.get(0).getRating());
+        } else {
+            txtLowestRated.setText(gameModel.getLowestGameAsString(lowestGames.get(0)));
+        }
         double averageScore = gameRatingManager.getAverageScore(gameModel.getGameRatings());
         txtAverage.setText("" + averageScore);
     }
@@ -115,7 +124,7 @@ public class RateMyGameMainViewController implements Initializable {
     public void handleClearRatingList(ActionEvent event) {
         txtHighestRated.setText("");
         txtLowestRated.setText("");
-        txtRate.setText("");
+        txtAverage.setText("");
         gameModel.clearRatings();
     }
 }
