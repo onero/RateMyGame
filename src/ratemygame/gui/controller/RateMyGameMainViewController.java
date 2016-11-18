@@ -14,7 +14,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -35,10 +34,6 @@ public class RateMyGameMainViewController implements Initializable {
     @FXML
     private TextField txtDescription;
     @FXML
-    private Button btnOpen;
-    @FXML
-    private Button btnSave;
-    @FXML
     private TableColumn<Game, String> tableDescription;
     @FXML
     private TableColumn<Game, Double> tableRate;
@@ -52,8 +47,6 @@ public class RateMyGameMainViewController implements Initializable {
     private TextField txtAverage;
     @FXML
     private LineChart<Double, Integer> chart;
-    @FXML
-    private Button btnClear;
 
     private final GameRatingTemplate gameRatingTemplate;
     private final GameRatingManager gameRatingManager;
@@ -94,6 +87,7 @@ public class RateMyGameMainViewController implements Initializable {
             //Clears the textFields after use.
             txtDescription.setText("");
             txtRate.setText("");
+            //Uodate statistics after game is added
             getMeanRatings();
         }
     }

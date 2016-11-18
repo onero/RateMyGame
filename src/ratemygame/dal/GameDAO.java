@@ -12,8 +12,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import ratemygame.be.Game;
 
 public class GameDAO {
@@ -41,20 +41,23 @@ public class GameDAO {
     }
 
     /**
-     * Saves the file
+     * Save the file
      *
      * @param gameRatings
+     * @throws java.io.FileNotFoundException
      */
-    public void saveFile(ArrayList<Game> gameRatings) {
-        try {
-            PrintWriter out = new PrintWriter("src/ratemygame/assets/gameRatings.txt");
+    public void saveFile(ArrayList<Game> gameRatings) throws FileNotFoundException {
+        FileChooser saveFile = new FileChooser();
+        FileChooser.ExtensionFilter txtFilter = new FileChooser.ExtensionFilter("Text document (*.txt)", "*.txt");
+        saveFile.getExtensionFilters().add(txtFilter);
+        saveFile.setSelectedExtensionFilter(txtFilter);
+        saveFile.setInitialFileName("gameRating");
+        File gameRatingsFile = saveFile.showSaveDialog(new Stage());
+        try (PrintWriter out = new PrintWriter(gameRatingsFile)) {
             for (Game gameRating : gameRatings) {
                 out.write(gameRating.getDescription() + "," + gameRating.getRating());
                 out.println();
             }
-            out.close();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(GameDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
