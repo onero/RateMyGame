@@ -47,7 +47,7 @@ public class GameDAO {
      */
     public void saveFile(ArrayList<Game> gameRatings) {
         try {
-            PrintWriter out = new PrintWriter("/ratemygame/assets/gameRatings.txt");
+            PrintWriter out = new PrintWriter("src/ratemygame/assets/gameRatings.txt");
             for (Game gameRating : gameRatings) {
                 out.write(gameRating.getDescription() + "," + gameRating.getRating());
                 out.println();
