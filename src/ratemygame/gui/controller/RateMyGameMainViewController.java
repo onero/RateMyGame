@@ -69,23 +69,23 @@ public class RateMyGameMainViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         ObservableList<Game> ratingList
                 = gameModel.getRatings();
-        tableDescription.setCellValueFactory(new PropertyValueFactory<>("Decription"));
-        tableRate.setCellValueFactory(new PropertyValueFactory<>("Rating"));
+        tableDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        tableRate.setCellValueFactory(new PropertyValueFactory<>("rating"));
         tableGameRatings.setItems(ratingList);
     }
-    
+
     /**
-     * Checks if the textFields is not empty. If yes, create a new Game object 
+     * Checks if the textFields is not empty. If yes, create a new Game object
      * and add it to the rating List.
-     * @param event 
+     *
+     * @param event
      */
     public void handleAddGameRating(ActionEvent event) {
-        if(txtDescription.getText() != null && txtRate.getText() != null)
-        {
+        if (txtDescription.getText() != null && txtRate.getText() != null) {
             String gameDescription = txtDescription.getText();
             double gameRating = Double.parseDouble(txtRate.getText());
             Game game = gameRatingTemplate.addGameRating(gameDescription, gameRating);
             gameModel.addGameToRatings(game);
-        }        
+        }
     }
 }

@@ -15,6 +15,7 @@ public class GameModel {
 
     public GameModel() {
         this.ratings = FXCollections.observableArrayList();
+        ratings.add(new Game("Skyrim", 5));
     }
 
     /**
@@ -25,13 +26,13 @@ public class GameModel {
     public ObservableList<Game> getRatings() {
         return ratings;
     }
-    
+
     /**
      * Add a Game object to ratings List.
+     *
      * @param gameToAdd the Game object to be added.
      */
-    public void addGameToRatings(Game gameToAdd)
-    {
+    public void addGameToRatings(Game gameToAdd) {
         ratings.add(gameToAdd);
     }
 
