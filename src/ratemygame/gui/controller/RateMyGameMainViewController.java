@@ -99,4 +99,13 @@ public class RateMyGameMainViewController implements Initializable {
         double highestGameRating;
 
     }
+
+    /**
+     * Clears the ratings List.
+     *
+     * @param event
+     */
+    public void handleClearRatingList(ActionEvent event) {
+        gameModel.clearRatings();
+    }
 }
