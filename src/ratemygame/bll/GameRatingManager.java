@@ -5,6 +5,8 @@
  */
 package ratemygame.bll;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import ratemygame.be.Game;
 import ratemygame.dal.GameDAO;
@@ -84,4 +86,33 @@ public class GameRatingManager {
         return average;
     }
 
+    /**
+     * Opens new file and gets data to controller
+     *
+     * @return
+     */
+    public ArrayList<Game> savedRatings() {
+        return null;
+    }
+
+    /**
+     * Sends the file to the GameDAO and gets back information for the
+     * controller
+     *
+     * @param selectedFile
+     * @return
+     * @throws java.io.IOException
+     */
+    public ArrayList<Game> readFile(File selectedFile) throws IOException {
+        return gameDAO.readFromFile(selectedFile);
+    }
+
+    /**
+     * Sends the file to the GameDAO to save the file at the selected location
+     *
+     * @param gameRatings
+     */
+    public void saveGameRatings(ArrayList<Game> gameRatings) {
+        gameDAO.saveFile(gameRatings);
+    }
 }

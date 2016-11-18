@@ -5,11 +5,12 @@
  */
 package ratemygame.gui.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
@@ -18,6 +19,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import ratemygame.be.Game;
 import ratemygame.bll.GameRatingManager;
 import ratemygame.bll.GameRatingTemplate;
@@ -81,9 +84,8 @@ public class RateMyGameMainViewController implements Initializable {
      * Checks if the textFields is not empty. If yes, create a new Game object
      * and add it to the rating List.
      *
-     * @param event
      */
-    public void handleAddGameRating(ActionEvent event) {
+    public void handleAddGameRating() {
         if (!txtDescription.getText().equals("") && !txtRate.getText().equals("") && txtRate.getText().matches("\\d")) {
             String gameDescription = txtDescription.getText();
             double gameRating = Double.parseDouble(txtRate.getText());
@@ -119,12 +121,33 @@ public class RateMyGameMainViewController implements Initializable {
     /**
      * Clears the ratings List.
      *
-     * @param event
      */
-    public void handleClearRatingList(ActionEvent event) {
+    public void handleClearRatingList() {
         txtHighestRated.setText("");
         txtLowestRated.setText("");
         txtAverage.setText("");
         gameModel.clearRatings();
+    }
+
+    /**
+     * Opens file and sends data to model
+     *
+     * @throws java.io.IOException
+     */
+    public void handleOpenFile() throws IOException {
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Find game ratings");
+        File selectedFile = chooser.showOpenDialog(new Stage());
+        gameModel.loadSavedGameRatings(gameRatingManager.readFile(selectedFile));
+        getMeanRatings();
+    }
+
+    /**
+     * Save the data from the model to a file
+     *
+     */
+    public void handleSaveFile() {
+        gameRatingManager.saveGameRatings(gameModel.getGameRatings());
+
     }
 }
