@@ -47,13 +47,14 @@ public class RateMyGameMainViewController implements Initializable {
     @FXML
     private TextField txtAverage;
     @FXML
-    private LineChart<?, ?> chart;
+    private LineChart<Double, Integer> chart;
     @FXML
     private Button btnClear;
 
     private final GameRatingTemplate gameRatingTemplate;
     private final GameRatingManager gameRatingManager;
     private final GameModel gameModel;
+    
     @FXML
     private TableView<Game> tableGameRatings;
 
