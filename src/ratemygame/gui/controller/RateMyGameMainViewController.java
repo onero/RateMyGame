@@ -12,6 +12,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -47,16 +49,20 @@ public class RateMyGameMainViewController implements Initializable {
     @FXML
     private TextField txtAverage;
     @FXML
-    private LineChart<Double, Integer> chart;
+    private final LineChart<Number, Number> chart;
     @FXML
     private Button btnClear;
+    @FXML
+    private TableView<Game> tableGameRatings;
 
     private final GameRatingTemplate gameRatingTemplate;
     private final GameRatingManager gameRatingManager;
     private final GameModel gameModel;
     
-    @FXML
-    private TableView<Game> tableGameRatings;
+    private final NumberAxis xAxis = new NumberAxis();
+    private final NumberAxis yAxis = new NumberAxis();
+    private XYChart.Series series;
+    
 
     /**
      *
@@ -65,6 +71,13 @@ public class RateMyGameMainViewController implements Initializable {
         gameRatingTemplate = new GameRatingTemplate();
         gameModel = new GameModel();
         gameRatingManager = new GameRatingManager();
+        chart = new LineChart<>(xAxis, yAxis);
+        chart.setTitle("Hello World!");
+        series = new XYChart.Series<>();
+        series.setName("Hello World");
+        series.getData().add(new XYChart.Data<>(10, 10));
+        series.getData().add(new XYChart.Data<>(100, 100));
+        chart.getData().add(series);
     }
 
     @Override
