@@ -15,4 +15,12 @@ public class Game {
         this.rating = rating;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
 }
