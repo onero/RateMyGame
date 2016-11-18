@@ -85,6 +85,8 @@ public class GameModel {
 
     /**
      * Load saved list of game ratings
+     *
+     * @param savedGameRatings
      */
     public void loadSavedGameRatings(ArrayList<Game> savedGameRatings) {
         ratings.clear();
