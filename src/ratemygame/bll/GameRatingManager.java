@@ -5,11 +5,6 @@
  */
 package ratemygame.bll;
 
-/**
- *
- * @author Rasmus
- */
-public class GameRatingManager
-{
-    
+public class GameRatingManager {
+
 }

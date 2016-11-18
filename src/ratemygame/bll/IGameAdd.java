@@ -5,14 +5,17 @@
  */
 package ratemygame.bll;
 
-public abstract class IGameAdd {
+import ratemygame.be.Game;
+
+public interface IGameAdd {
 
     /**
      * Add a game to
      *
      * @param description
      * @param rating
+     * @return 
      */
-    public abstract void addGameRating(String description, double rating);
+    public Game addGameRating(String description, double rating);
 
 }
