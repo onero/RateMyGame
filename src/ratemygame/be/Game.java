@@ -7,8 +7,8 @@ package ratemygame.be;
 
 public class Game {
 
-    private String description;
-    private double rating;
+    private final String description;
+    private final double rating;
 
     public Game(String description, double rating) {
         this.description = description;

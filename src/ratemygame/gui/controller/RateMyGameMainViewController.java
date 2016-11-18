@@ -18,6 +18,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import ratemygame.be.Game;
+import ratemygame.bll.GameRatingManager;
 import ratemygame.bll.GameRatingTemplate;
 import ratemygame.gui.model.GameModel;
 
@@ -51,6 +52,7 @@ public class RateMyGameMainViewController implements Initializable {
     private Button btnClear;
 
     private final GameRatingTemplate gameRatingTemplate;
+    private final GameRatingManager gameRatingManager;
     private final GameModel gameModel;
     @FXML
     private TableView<Game> tableGameRatings;
@@ -61,12 +63,13 @@ public class RateMyGameMainViewController implements Initializable {
     public RateMyGameMainViewController() {
         gameRatingTemplate = new GameRatingTemplate();
         gameModel = new GameModel();
+        gameRatingManager = new GameRatingManager();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ObservableList<Game> ratingList
-                = gameModel.getRatings();
+                = gameModel.getObservableRatings();
         tableDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
         tableRate.setCellValueFactory(new PropertyValueFactory<>("rating"));
         tableGameRatings.setItems(ratingList);
@@ -95,9 +98,8 @@ public class RateMyGameMainViewController implements Initializable {
      * Updates highest, lowest and average score
      */
     private void getMeanRatings() {
-        String highestGame;
-        double highestGameRating;
-
+        Game highestGame = gameRatingManager.getHighestRating(gameModel.getGameRatings());
+        txtHighestRated.setText(gameModel.getHighestGameAsString(highestGame));
     }
 
     /**
@@ -106,6 +108,9 @@ public class RateMyGameMainViewController implements Initializable {
      * @param event
      */
     public void handleClearRatingList(ActionEvent event) {
+        txtHighestRated.setText("");
+        txtLowestRated.setText("");
+        txtRate.setText("");
         gameModel.clearRatings();
     }
 }
