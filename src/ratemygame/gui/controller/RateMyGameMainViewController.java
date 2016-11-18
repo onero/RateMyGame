@@ -13,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -28,7 +27,6 @@ import ratemygame.gui.model.GameModel;
  */
 public class RateMyGameMainViewController implements Initializable {
 
-    private Label label;
     @FXML
     private TextField txtDescription;
     @FXML
@@ -81,7 +79,7 @@ public class RateMyGameMainViewController implements Initializable {
      * @param event
      */
     public void handleAddGameRating(ActionEvent event) {
-        if (txtDescription.getText() != null && txtRate.getText() != null) {
+        if (!txtDescription.getText().equals("") && !txtRate.getText().equals("") && txtRate.getText().matches("\\d")) {
             String gameDescription = txtDescription.getText();
             double gameRating = Double.parseDouble(txtRate.getText());
             Game game = gameRatingTemplate.addGameRating(gameDescription, gameRating);
@@ -89,6 +87,16 @@ public class RateMyGameMainViewController implements Initializable {
             //Clears the textFields after use.
             txtDescription.setText("");
             txtRate.setText("");
+            getMeanRatings();
         }
+    }
+
+    /**
+     * Updates highest, lowest and average score
+     */
+    private void getMeanRatings() {
+        String highestGame;
+        double highestGameRating;
+
     }
 }
