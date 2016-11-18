@@ -14,6 +14,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
+import ratemygame.bll.GameRatingTemplate;
+import ratemygame.gui.model.GameModel;
 
 /**
  *
@@ -45,8 +47,15 @@ public class RateMyGameMainViewController implements Initializable {
     @FXML
     private Button btnClear;
 
+    private GameRatingTemplate gameRatingTemplate;
+    private GameModel gameModel;
+
     public RateMyGameMainViewController() {
 
+    public RateMyGameMainViewController()
+    {
+        gameRatingTemplate = new GameRatingTemplate();
+        gameModel = new GameModel();
     }
 
     @Override
@@ -54,7 +63,8 @@ public class RateMyGameMainViewController implements Initializable {
         // TODO
     }
 
-    public void handleAddGameRating() {
-
+    public void handleAddGameRating(ActionEvent event)
+    {
+        
     }
 }
