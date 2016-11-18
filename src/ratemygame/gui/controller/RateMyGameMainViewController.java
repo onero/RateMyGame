@@ -7,6 +7,7 @@ package ratemygame.gui.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,7 +15,9 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import ratemygame.be.Game;
 import ratemygame.bll.GameRatingTemplate;
 import ratemygame.gui.model.GameModel;
@@ -51,6 +54,8 @@ public class RateMyGameMainViewController implements Initializable {
 
     private final GameRatingTemplate gameRatingTemplate;
     private final GameModel gameModel;
+    @FXML
+    private TableView<Game> tableGameRatings;
 
     /**
      *
@@ -62,7 +67,11 @@ public class RateMyGameMainViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        ObservableList<Game> ratingList
+                = gameModel.getRatings();
+        tableDescription.setCellValueFactory(new PropertyValueFactory<>("Decription"));
+        tableRate.setCellValueFactory(new PropertyValueFactory<>("Rating"));
+        tableGameRatings.setItems(ratingList);
     }
     
     /**
