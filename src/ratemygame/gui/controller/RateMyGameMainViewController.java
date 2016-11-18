@@ -86,6 +86,9 @@ public class RateMyGameMainViewController implements Initializable {
             double gameRating = Double.parseDouble(txtRate.getText());
             Game game = gameRatingTemplate.addGameRating(gameDescription, gameRating);
             gameModel.addGameToRatings(game);
+            //Clears the textFields after use.
+            txtDescription.setText("");
+            txtRate.setText("");
         }
     }
 }
