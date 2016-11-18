@@ -36,4 +36,40 @@ public class GameRatingManager {
         return highestGame;
     }
 
+    /**
+     * Get the lowest rating
+     *
+     * @param games
+     * @return
+     */
+    public Game getLowestRating(ArrayList<Game> games) {
+        Game highestGame = null;
+        double highestGameRating = 100;
+        for (Game currentGame : games) {
+            if (currentGame.getRating() < highestGameRating) {
+                highestGame = currentGame;
+                highestGameRating = currentGame.getRating();
+            }
+        }
+        return highestGame;
+    }
+
+    /**
+     * Get the average rating
+     *
+     * @param games
+     * @return
+     */
+    public double getAverageScore(ArrayList<Game> games) {
+        double total = 0;
+        int amount = 0;
+        double average;
+        for (Game game : games) {
+            total += game.getRating();
+            amount++;
+        }
+        average = total / amount;
+        return average;
+    }
+
 }

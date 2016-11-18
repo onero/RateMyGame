@@ -58,7 +58,7 @@ public class GameModel {
     }
 
     /**
-     * Returns the highest game rating
+     * Returns the highest game rating as String
      *
      * @param highestGame
      * @return
@@ -68,5 +68,18 @@ public class GameModel {
         highestGameAsString += highestGame.getDescription() + " - ";
         highestGameAsString += highestGame.getRating();
         return highestGameAsString;
+    }
+
+    /**
+     * Returns the highest game rating as String
+     *
+     * @param lowestGame
+     * @return
+     */
+    public String getLowestGameAsString(Game lowestGame) {
+        String lowestGameAsString = "";
+        lowestGameAsString += lowestGame.getDescription() + " - ";
+        lowestGameAsString += lowestGame.getRating();
+        return lowestGameAsString;
     }
 }

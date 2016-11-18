@@ -62,7 +62,6 @@ public class RateMyGameMainViewController implements Initializable {
     private final NumberAxis xAxis = new NumberAxis();
     private final NumberAxis yAxis = new NumberAxis();
     private XYChart.Series series;
-    
 
     /**
      *
@@ -114,6 +113,10 @@ public class RateMyGameMainViewController implements Initializable {
     private void getMeanRatings() {
         Game highestGame = gameRatingManager.getHighestRating(gameModel.getGameRatings());
         txtHighestRated.setText(gameModel.getHighestGameAsString(highestGame));
+        Game lowestGame = gameRatingManager.getLowestRating(gameModel.getGameRatings());
+        txtLowestRated.setText(gameModel.getLowestGameAsString(lowestGame));
+        double averageScore = gameRatingManager.getAverageScore(gameModel.getGameRatings());
+        txtAverage.setText("" + averageScore);
     }
 
     /**
