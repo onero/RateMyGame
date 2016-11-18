@@ -7,6 +7,7 @@ package ratemygame.gui.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
@@ -14,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
+import ratemygame.be.Game;
 import ratemygame.bll.GameRatingTemplate;
 import ratemygame.gui.model.GameModel;
 
@@ -31,9 +33,9 @@ public class RateMyGameMainViewController implements Initializable {
     @FXML
     private Button btnSave;
     @FXML
-    private TableColumn<?, ?> tableDescription;
+    private TableColumn<Game, String> tableDescription;
     @FXML
-    private TableColumn<?, ?> tableRate;
+    private TableColumn<Game, Double> tableRate;
     @FXML
     private TextField txtRate;
     @FXML
@@ -47,13 +49,13 @@ public class RateMyGameMainViewController implements Initializable {
     @FXML
     private Button btnClear;
 
-    private GameRatingTemplate gameRatingTemplate;
-    private GameModel gameModel;
+    private final GameRatingTemplate gameRatingTemplate;
+    private final GameModel gameModel;
 
+    /**
+     *
+     */
     public RateMyGameMainViewController() {
-
-    public RateMyGameMainViewController()
-    {
         gameRatingTemplate = new GameRatingTemplate();
         gameModel = new GameModel();
     }
@@ -63,8 +65,7 @@ public class RateMyGameMainViewController implements Initializable {
         // TODO
     }
 
-    public void handleAddGameRating(ActionEvent event)
-    {
-        
+    public void handleAddGameRating(ActionEvent event) {
+
     }
 }
