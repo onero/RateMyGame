@@ -1,0 +1,3 @@
+Skyrim,5.0
+The Witcher 3,3.0
+No mans sky,0.0

@@ -52,6 +52,7 @@ public class GameDAO {
                 out.write(gameRating.getDescription() + "," + gameRating.getRating());
                 out.println();
             }
+            out.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(GameDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
