@@ -54,7 +54,7 @@ public class RateMyGameMainViewController implements Initializable {
     private final GameRatingTemplate gameRatingTemplate;
     private final GameRatingManager gameRatingManager;
     private final GameModel gameModel;
-    
+
     @FXML
     private TableView<Game> tableGameRatings;
 
@@ -101,6 +101,10 @@ public class RateMyGameMainViewController implements Initializable {
     private void getMeanRatings() {
         Game highestGame = gameRatingManager.getHighestRating(gameModel.getGameRatings());
         txtHighestRated.setText(gameModel.getHighestGameAsString(highestGame));
+        Game lowestGame = gameRatingManager.getLowestRating(gameModel.getGameRatings());
+        txtLowestRated.setText(gameModel.getLowestGameAsString(lowestGame));
+        double averageScore = gameRatingManager.getAverageScore(gameModel.getGameRatings());
+        txtAverage.setText("" + averageScore);
     }
 
     /**
