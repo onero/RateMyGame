@@ -51,9 +51,19 @@ public class RateMyGameMainViewController implements Initializable {
         label.setText("Hello World!");
     }
 
+    public RateMyGameMainViewController()
+    {
+    }
+    
+    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-
+    
+    public void handleAddGameRating()
+    {
+        
+    }
 }
