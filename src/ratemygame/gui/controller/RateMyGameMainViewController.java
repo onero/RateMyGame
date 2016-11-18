@@ -7,7 +7,6 @@ package ratemygame.gui.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
@@ -46,24 +45,16 @@ public class RateMyGameMainViewController implements Initializable {
     @FXML
     private Button btnClear;
 
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
+    public RateMyGameMainViewController() {
 
-    public RateMyGameMainViewController()
-    {
     }
-    
-    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-    
-    public void handleAddGameRating()
-    {
-        
+
+    public void handleAddGameRating() {
+
     }
 }

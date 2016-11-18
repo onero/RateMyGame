@@ -5,6 +5,15 @@
  */
 package ratemygame.bll;
 
+import ratemygame.dal.GameDAO;
+
 public class GameRatingManager {
+
+    private final GameDAO gameDAO;
+
+    public GameRatingManager() {
+
+        gameDAO = new GameDAO();
+    }
 
 }
