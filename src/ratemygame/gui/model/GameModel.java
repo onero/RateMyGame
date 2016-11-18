@@ -25,5 +25,14 @@ public class GameModel {
     public ObservableList<Game> getRatings() {
         return ratings;
     }
+    
+    /**
+     * Add a Game object to ratings List.
+     * @param gameToAdd the Game object to be added.
+     */
+    public void addGameToRatings(Game gameToAdd)
+    {
+        ratings.add(gameToAdd);
+    }
 
 }

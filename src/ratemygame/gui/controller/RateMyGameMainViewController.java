@@ -64,8 +64,19 @@ public class RateMyGameMainViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-
+    
+    /**
+     * Checks if the textFields is not empty. If yes, create a new Game object 
+     * and add it to the rating List.
+     * @param event 
+     */
     public void handleAddGameRating(ActionEvent event) {
-
+        if(txtDescription.getText() != null && txtRate.getText() != null)
+        {
+            String gameDescription = txtDescription.getText();
+            double gameRating = Double.parseDouble(txtRate.getText());
+            Game game = gameRatingTemplate.addGameRating(gameDescription, gameRating);
+            gameModel.addGameToRatings(game);
+        }        
     }
 }
