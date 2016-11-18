@@ -10,4 +10,9 @@ public class Game {
     private String description;
     private double rating;
 
+    public Game(String description, double rating) {
+        this.description = description;
+        this.rating = rating;
+    }
+
 }
