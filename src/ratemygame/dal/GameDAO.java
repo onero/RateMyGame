@@ -18,6 +18,8 @@ import ratemygame.be.Game;
 
 public class GameDAO {
 
+    private static final String SPLIT_STRING = ",";
+
     /**
      * Reads from the file parsed and returns the data as an ArrayList
      *
@@ -27,17 +29,23 @@ public class GameDAO {
      */
     public ArrayList<Game> readFromFile(File selectedFile) throws FileNotFoundException, IOException {
         ArrayList<Game> savedGameRatings = new ArrayList<>();
+        //Try to open the parsed file
         try (BufferedReader gameReader = new BufferedReader(new FileReader(selectedFile))) {
             String line = gameReader.readLine();
             while (line != null) {
-                String[] dataArray = line.split(",");
+                //On each line split Array entry on ","
+                String[] dataArray = line.split(SPLIT_STRING);
                 savedGameRatings.add(new Game(
+                        //Add description of game as first entry
                         dataArray[0],
+                        //Add game rating as second entry
                         Double.parseDouble(dataArray[1])));
                 line = gameReader.readLine();
             }
         } catch (FileNotFoundException fnfe) {
             System.out.println("File not found");
+        } catch (IOException ioe) {
+            System.out.println("Something terrible just happened!");
         }
         return savedGameRatings;
     }
@@ -50,9 +58,11 @@ public class GameDAO {
      */
     public void saveFile(ArrayList<Game> gameRatings) throws FileNotFoundException {
         FileChooser saveFile = new FileChooser();
+        //Define that only .txt files will be saved
         FileChooser.ExtensionFilter txtFilter = new FileChooser.ExtensionFilter("Text document (*.txt)", "*.txt");
         saveFile.getExtensionFilters().add(txtFilter);
         saveFile.setSelectedExtensionFilter(txtFilter);
+        //Define initial file name
         saveFile.setInitialFileName("gameRating");
         File gameRatingsFile = saveFile.showSaveDialog(new Stage());
         try (PrintWriter out = new PrintWriter(gameRatingsFile)) {

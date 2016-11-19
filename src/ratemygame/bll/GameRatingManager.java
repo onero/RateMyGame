@@ -15,6 +15,8 @@ import ratemygame.dal.GameDAO;
 public class GameRatingManager {
 
     private final GameDAO gameDAO;
+    private static final int HIGHEST_RATING = 5;
+    private static final int LOWEST_RATING = -1;
 
     public GameRatingManager() {
 
@@ -30,13 +32,15 @@ public class GameRatingManager {
     public ArrayList<Game> getHighestRating(ArrayList<Game> games) {
         Game highestGame = null;
         ArrayList<Game> highGames = new ArrayList<>();
-        double highestGameRating = -1;
+        double highestGameRating = LOWEST_RATING;
+        //For every game in the list check if the next one has a higher rating
         for (Game currentGame : games) {
             if (currentGame.getRating() > highestGameRating) {
                 highestGame = currentGame;
                 highestGameRating = currentGame.getRating();
             }
         }
+        //For every game check how many game has the highest rating and add them to highGames
         for (Game currentGame : games) {
             if (currentGame.getRating() == highestGame.getRating()) {
                 highGames.add(currentGame);
@@ -54,13 +58,15 @@ public class GameRatingManager {
     public ArrayList<Game> getLowestRating(ArrayList<Game> games) {
         Game highestGame = null;
         ArrayList<Game> lowGames = new ArrayList<>();
-        double highestGameRating = 100;
+        double lowestGameRating = HIGHEST_RATING;
+        //For every game in the list check if the next one has a lower rating
         for (Game currentGame : games) {
-            if (currentGame.getRating() < highestGameRating) {
+            if (currentGame.getRating() < lowestGameRating) {
                 highestGame = currentGame;
-                highestGameRating = currentGame.getRating();
+                lowestGameRating = currentGame.getRating();
             }
         }
+        //For every game check how many game has the lowest rating and add them to highGames
         for (Game currentGame : games) {
             if (currentGame.getRating() == highestGame.getRating()) {
                 lowGames.add(currentGame);
@@ -112,6 +118,7 @@ public class GameRatingManager {
      * Sends the file to the GameDAO to save the file at the selected location
      *
      * @param gameRatings
+     * @throws java.io.FileNotFoundException
      */
     public void saveGameRatings(ArrayList<Game> gameRatings) throws FileNotFoundException {
         gameDAO.saveFile(gameRatings);

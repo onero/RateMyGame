@@ -26,10 +26,6 @@ import ratemygame.bll.GameRatingManager;
 import ratemygame.bll.GameRatingTemplate;
 import ratemygame.gui.model.GameModel;
 
-/**
- *
- * @author Adamino
- */
 public class RateMyGameMainViewController implements Initializable {
 
     @FXML
@@ -56,15 +52,18 @@ public class RateMyGameMainViewController implements Initializable {
     @FXML
     private TableView<Game> tableGameRatings;
 
-    /**
-     *
-     */
     public RateMyGameMainViewController() {
         gameRatingTemplate = new GameRatingTemplate();
         gameModel = new GameModel();
         gameRatingManager = new GameRatingManager();
     }
 
+    /**
+     * Initialize the view with game rating information
+     *
+     * @param url
+     * @param rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ObservableList<Game> ratingList
@@ -86,6 +85,7 @@ public class RateMyGameMainViewController implements Initializable {
                 && txtRate.getText().matches("([0-4].\\d|5.0|[0-5])")) {
             String gameDescription = txtDescription.getText();
             double gameRating = Double.parseDouble(txtRate.getText());
+            //Create a new game and add it to the model
             Game game = gameRatingTemplate.addGameRating(gameDescription, gameRating);
             gameModel.addGameToRatings(game);
             //Clears the textFields after use.
@@ -102,6 +102,7 @@ public class RateMyGameMainViewController implements Initializable {
     private void getMeanRatings() {
         ArrayList<Game> highestGames = gameRatingManager.getHighestRating(gameModel.getGameRatings());
         ArrayList<Game> lowestGames = gameRatingManager.getLowestRating(gameModel.getGameRatings());
+        //If more than one game has the same score then show how many share the same score, otherwise just show high/low game
         if (highestGames.size() > 1) {
             txtHighestRated.setText(highestGames.size() + " games with the rating of " + highestGames.get(0).getRating());
         } else {
@@ -133,6 +134,7 @@ public class RateMyGameMainViewController implements Initializable {
      * @throws java.io.IOException
      */
     public void handleOpenFile() throws IOException {
+        //Create new window for opening a file
         FileChooser chooser = new FileChooser();
         chooser.setTitle("Find game ratings");
         File selectedFile = chooser.showOpenDialog(new Stage());

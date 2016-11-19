@@ -15,10 +15,20 @@ public class Game {
         this.rating = rating;
     }
 
+    /**
+     * Gets the description of the Game
+     *
+     * @return
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Gets the rating of the Game
+     *
+     * @return
+     */
     public double getRating() {
         return rating;
     }
