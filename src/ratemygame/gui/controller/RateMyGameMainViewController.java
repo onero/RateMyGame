@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -43,14 +44,13 @@ public class RateMyGameMainViewController implements Initializable {
     @FXML
     private TextField txtAverage;
     @FXML
-    private LineChart<Double, Integer> chart;
+    private LineChart<Number, Number> chart;
+    @FXML
+    private TableView<Game> tableGameRatings;
 
     private final GameRatingTemplate gameRatingTemplate;
     private final GameRatingManager gameRatingManager;
     private final GameModel gameModel;
-
-    @FXML
-    private TableView<Game> tableGameRatings;
 
     public RateMyGameMainViewController() {
         gameRatingTemplate = new GameRatingTemplate();
@@ -68,9 +68,12 @@ public class RateMyGameMainViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         ObservableList<Game> ratingList
                 = gameModel.getObservableRatings();
-        tableDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        tableDescription.setCellValueFactory(new PropertyValueFactory<>("title"));
         tableRate.setCellValueFactory(new PropertyValueFactory<>("rating"));
         tableGameRatings.setItems(ratingList);
+        getMeanRatings();
+        updateLineChart();
+
     }
 
     /**
@@ -93,6 +96,9 @@ public class RateMyGameMainViewController implements Initializable {
             txtRate.setText("");
             //Uodate statistics after game is added
             getMeanRatings();
+
+            //Set the chart.
+            updateLineChart();
         }
     }
 
@@ -125,7 +131,27 @@ public class RateMyGameMainViewController implements Initializable {
         txtHighestRated.setText("");
         txtLowestRated.setText("");
         txtAverage.setText("");
+        txtRate.setText("");
         gameModel.clearRatings();
+        updateLineChart();
+    }
+
+    /**
+     * Updates the lineChart.
+     */
+    private void updateLineChart() {
+        //Clears the chart for exiting data, ready to receive new one.
+        chart.getData().clear();
+        //Gets the data the chart shall display.
+        ArrayList<Integer> amountOfGamesWithSameRating = gameRatingManager.getAmountOfGamesWithSameRating(gameModel.getGameRatings());
+        //Create the serie that holds the data in the chart.
+        XYChart.Series<Number, Number> series = new XYChart.Series<>();
+        for (int i = 0; i < amountOfGamesWithSameRating.size(); i++) {
+            //Filling the serie with the data.
+            series.getData().add(new XYChart.Data<>(i, amountOfGamesWithSameRating.get(i)));
+        }
+        //Adds the serie to the chart, so it will display it.
+        chart.getData().add(series);
     }
 
     /**
@@ -140,6 +166,7 @@ public class RateMyGameMainViewController implements Initializable {
         File selectedFile = chooser.showOpenDialog(new Stage());
         gameModel.loadSavedGameRatings(gameRatingManager.readFile(selectedFile));
         getMeanRatings();
+        updateLineChart();
     }
 
     /**

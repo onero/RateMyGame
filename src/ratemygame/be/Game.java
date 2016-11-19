@@ -7,27 +7,31 @@ package ratemygame.be;
 
 public class Game {
 
-    private final String description;
+    private final String title;
     private final double rating;
 
-    public Game(String description, double rating) {
-        this.description = description;
+    public Game(String title, double rating) {
+        this.title = title;
         this.rating = rating;
-    }
-
-    /**
-     * Gets the description of the Game
-     *
-     * @return
-     */
-    public String getDescription() {
-        return description;
     }
 
     /**
      * Gets the rating of the Game
      *
+     * @return =======
+     *
+     * /**
+     * Return the title of the game.
      * @return
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * Return the rating of the game.
+     *
+     * @return >>>>>>> refs/remotes/origin/LineChart
      */
     public double getRating() {
         return rating;
