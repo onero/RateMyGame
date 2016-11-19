@@ -82,4 +82,14 @@ public class GameModel {
         lowestGameAsString += lowestGame.getRating();
         return lowestGameAsString;
     }
+
+    /**
+     * Load saved list of game ratings
+     *
+     * @param savedGameRatings
+     */
+    public void loadSavedGameRatings(ArrayList<Game> savedGameRatings) {
+        ratings.clear();
+        ratings.addAll(savedGameRatings);
+    }
 }
