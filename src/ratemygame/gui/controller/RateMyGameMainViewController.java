@@ -6,13 +6,13 @@
 package ratemygame.gui.controller;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -49,7 +49,7 @@ public class RateMyGameMainViewController implements Initializable {
     @FXML
     private TextField txtAverage;
     @FXML
-    private final LineChart<Number, Number> chart;
+    private LineChart<Number, Number> chart;
     @FXML
     private Button btnClear;
     @FXML
@@ -59,9 +59,7 @@ public class RateMyGameMainViewController implements Initializable {
     private final GameRatingManager gameRatingManager;
     private final GameModel gameModel;
     
-    private final NumberAxis xAxis = new NumberAxis();
-    private final NumberAxis yAxis = new NumberAxis();
-    private XYChart.Series series;
+    private ArrayList<Integer> amountOfGamesWithSameRating;
 
     /**
      *
@@ -69,23 +67,23 @@ public class RateMyGameMainViewController implements Initializable {
     public RateMyGameMainViewController() {
         gameRatingTemplate = new GameRatingTemplate();
         gameModel = new GameModel();
-        gameRatingManager = new GameRatingManager();
-        chart = new LineChart<>(xAxis, yAxis);
-        chart.setTitle("Hello World!");
-        series = new XYChart.Series<>();
-        series.setName("Hello World");
-        series.getData().add(new XYChart.Data<>(10, 10));
-        series.getData().add(new XYChart.Data<>(100, 100));
-        chart.getData().add(series);
+        gameRatingManager = new GameRatingManager();  
+        amountOfGamesWithSameRating = gameRatingManager.addGamesToChartSeries(gameModel.getGameRatings());
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ObservableList<Game> ratingList
                 = gameModel.getObservableRatings();
-        tableDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        tableDescription.setCellValueFactory(new PropertyValueFactory<>("title"));
         tableRate.setCellValueFactory(new PropertyValueFactory<>("rating"));
         tableGameRatings.setItems(ratingList);
+        XYChart.Series<Number, Number> chartSeries = new XYChart.Series<>();
+        for(int i = 0; i < amountOfGamesWithSameRating.size(); i++)
+        {
+            chartSeries.getData().add(new XYChart.Data<>(i, amountOfGamesWithSameRating.get(i)));
+        }
+        chart.getData().add(chartSeries);
     }
 
     /**
@@ -104,6 +102,16 @@ public class RateMyGameMainViewController implements Initializable {
             txtDescription.setText("");
             txtRate.setText("");
             getMeanRatings();
+            
+            //Set the chart.
+            chart.getData().clear();
+            amountOfGamesWithSameRating = gameRatingManager.addGamesToChartSeries(gameModel.getGameRatings());
+            XYChart.Series<Number, Number> series = new XYChart.Series<>();
+            for(int i = 0; i < amountOfGamesWithSameRating.size(); i++)
+            {
+                series.getData().add(new XYChart.Data<>(i, amountOfGamesWithSameRating.get(i)));
+            }
+            chart.getData().add(series);
         }
     }
 
@@ -127,7 +135,10 @@ public class RateMyGameMainViewController implements Initializable {
     public void handleClearRatingList(ActionEvent event) {
         txtHighestRated.setText("");
         txtLowestRated.setText("");
+        txtAverage.setText("");
         txtRate.setText("");
         gameModel.clearRatings();
     }
+    
+    
 }

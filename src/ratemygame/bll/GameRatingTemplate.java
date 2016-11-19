@@ -24,5 +24,5 @@ public class GameRatingTemplate implements IGameAdd
     {
         Game gameToAdd = new Game(description, rating);
         return gameToAdd;
-    }
+    }    
 }

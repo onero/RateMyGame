@@ -17,6 +17,8 @@ public class GameModel {
     public GameModel() {
         this.ratings = FXCollections.observableArrayList();
         ratings.add(new Game("Skyrim", 5));
+        ratings.add(new Game("The Witcher 3", 5));
+        ratings.add(new Game("No Mans Sky", 0));
     }
 
     /**
@@ -65,7 +67,7 @@ public class GameModel {
      */
     public String getHighestGameAsString(Game highestGame) {
         String highestGameAsString = "";
-        highestGameAsString += highestGame.getDescription() + " - ";
+        highestGameAsString += highestGame.getTitle() + " - ";
         highestGameAsString += highestGame.getRating();
         return highestGameAsString;
     }
@@ -78,7 +80,7 @@ public class GameModel {
      */
     public String getLowestGameAsString(Game lowestGame) {
         String lowestGameAsString = "";
-        lowestGameAsString += lowestGame.getDescription() + " - ";
+        lowestGameAsString += lowestGame.getTitle() + " - ";
         lowestGameAsString += lowestGame.getRating();
         return lowestGameAsString;
     }

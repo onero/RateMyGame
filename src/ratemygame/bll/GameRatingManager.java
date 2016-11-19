@@ -71,5 +71,53 @@ public class GameRatingManager {
         average = total / amount;
         return average;
     }
-
+    
+    public ArrayList<Integer> addGamesToChartSeries(ArrayList<Game> games)
+    {
+        ArrayList<Double> ratingOfAllgames = new ArrayList<>();
+        int ratingZero = 0; int ratingOne = 0; int ratingTwo = 0; int ratingThree = 0; int ratingFour = 0; int ratingFive = 0;
+        
+        //Gets all the ratings and store them in an ArrayList.
+        for(int i = 0; i < games.size(); i++)
+        {
+            ratingOfAllgames.add(games.get(i).getRating());
+        }
+        //Checks all ratings for what category they belong to and add one to that category.
+        for(int i = 0; i < ratingOfAllgames.size(); i++)
+        {
+            if(ratingOfAllgames.get(i) >= 0 && ratingOfAllgames.get(i) < 1)
+            {
+                ratingZero++;
+            }
+            else if(ratingOfAllgames.get(i) >= 1 && ratingOfAllgames.get(i) < 2)
+            {
+                ratingOne++;
+            }
+            else if(ratingOfAllgames.get(i) >= 2 && ratingOfAllgames.get(i) < 3)
+            {
+                ratingTwo++;
+            }
+            else if(ratingOfAllgames.get(i) >= 3 && ratingOfAllgames.get(i) < 4)
+            {
+                ratingThree++;
+            }
+            else if(ratingOfAllgames.get(i) >= 4 && ratingOfAllgames.get(i) < 5)
+            {
+                ratingFour++;
+            }
+            else
+            {
+                ratingFive++;
+            }
+        }
+        //Puts all the categorys in an ArrayList to return all the categorys.
+        ArrayList<Integer> amountOfGamesWithSameRating = new ArrayList<>();
+        amountOfGamesWithSameRating.add(ratingZero);
+        amountOfGamesWithSameRating.add(ratingOne);
+        amountOfGamesWithSameRating.add(ratingTwo);
+        amountOfGamesWithSameRating.add(ratingThree);
+        amountOfGamesWithSameRating.add(ratingFour);
+        amountOfGamesWithSameRating.add(ratingFive);
+        return amountOfGamesWithSameRating;
+    }
 }
