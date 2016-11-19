@@ -58,17 +58,12 @@ public class RateMyGameMainViewController implements Initializable {
     private final GameRatingTemplate gameRatingTemplate;
     private final GameRatingManager gameRatingManager;
     private final GameModel gameModel;
-    
-    private ArrayList<Integer> amountOfGamesWithSameRating;
 
-    /**
-     *
-     */
+    
     public RateMyGameMainViewController() {
         gameRatingTemplate = new GameRatingTemplate();
         gameModel = new GameModel();
         gameRatingManager = new GameRatingManager();  
-        amountOfGamesWithSameRating = gameRatingManager.addGamesToChartSeries(gameModel.getGameRatings());
     }
 
     @Override
@@ -78,12 +73,9 @@ public class RateMyGameMainViewController implements Initializable {
         tableDescription.setCellValueFactory(new PropertyValueFactory<>("title"));
         tableRate.setCellValueFactory(new PropertyValueFactory<>("rating"));
         tableGameRatings.setItems(ratingList);
-        XYChart.Series<Number, Number> chartSeries = new XYChart.Series<>();
-        for(int i = 0; i < amountOfGamesWithSameRating.size(); i++)
-        {
-            chartSeries.getData().add(new XYChart.Data<>(i, amountOfGamesWithSameRating.get(i)));
-        }
-        chart.getData().add(chartSeries);
+        
+        //
+        updateLineChart();
     }
 
     /**
@@ -104,14 +96,7 @@ public class RateMyGameMainViewController implements Initializable {
             getMeanRatings();
             
             //Set the chart.
-            chart.getData().clear();
-            amountOfGamesWithSameRating = gameRatingManager.addGamesToChartSeries(gameModel.getGameRatings());
-            XYChart.Series<Number, Number> series = new XYChart.Series<>();
-            for(int i = 0; i < amountOfGamesWithSameRating.size(); i++)
-            {
-                series.getData().add(new XYChart.Data<>(i, amountOfGamesWithSameRating.get(i)));
-            }
-            chart.getData().add(series);
+            updateLineChart();
         }
     }
 
@@ -138,7 +123,26 @@ public class RateMyGameMainViewController implements Initializable {
         txtAverage.setText("");
         txtRate.setText("");
         gameModel.clearRatings();
+        updateLineChart();
     }
     
-    
+    /**
+     * Updates the lineChart.
+     */
+    private void updateLineChart()
+    {
+        //Clears the chart for exiting data, ready to receive new one.
+        chart.getData().clear(); 
+        //Gets the data the chart shall display.
+        ArrayList<Integer> amountOfGamesWithSameRating = gameRatingManager.getAmountOfGamesWithSameRating(gameModel.getGameRatings());
+        //Create the serie that holds the data in the chart.
+        XYChart.Series<Number, Number> series = new XYChart.Series<>();
+        for(int i = 0; i < amountOfGamesWithSameRating.size(); i++)
+        {
+            //Filling the serie with the data.
+            series.getData().add(new XYChart.Data<>(i, amountOfGamesWithSameRating.get(i)));
+        }
+        //Adds the serie to the chart, so it will display it.
+        chart.getData().add(series);
+    }
 }

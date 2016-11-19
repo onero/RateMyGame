@@ -72,10 +72,17 @@ public class GameRatingManager {
         return average;
     }
     
-    public ArrayList<Integer> addGamesToChartSeries(ArrayList<Game> games)
+    /**
+     * Gets all ratings and puts them in an arrayList. Then loop that arrayList
+     * and check what range the rating is inside and add one to that rating.
+     * Then save the amount of each rating in an arrayList and return that List.
+     * @param games A List of all games that need to be checked.
+     * @return A list containing how many games got a rating in each category.
+     */
+    public ArrayList<Integer> getAmountOfGamesWithSameRating(ArrayList<Game> games)
     {
         ArrayList<Double> ratingOfAllgames = new ArrayList<>();
-        int ratingZero = 0; int ratingOne = 0; int ratingTwo = 0; int ratingThree = 0; int ratingFour = 0; int ratingFive = 0;
+        int ratingZero = 0, ratingOne = 0, ratingTwo = 0, ratingThree = 0, ratingFour = 0, ratingFive = 0;
         
         //Gets all the ratings and store them in an ArrayList.
         for(int i = 0; i < games.size(); i++)
