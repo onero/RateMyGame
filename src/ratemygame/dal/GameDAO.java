@@ -36,6 +36,8 @@ public class GameDAO {
                         Double.parseDouble(dataArray[1])));
                 line = gameReader.readLine();
             }
+        } catch (FileNotFoundException fnfe) {
+            System.out.println("File not found");
         }
         return savedGameRatings;
     }
@@ -58,6 +60,8 @@ public class GameDAO {
                 out.write(gameRating.getDescription() + "," + gameRating.getRating());
                 out.println();
             }
+        } catch (FileNotFoundException fnfe) {
+            System.out.println("File not found");
         }
     }
 

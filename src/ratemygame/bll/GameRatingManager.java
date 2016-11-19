@@ -6,6 +6,7 @@
 package ratemygame.bll;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import ratemygame.be.Game;
@@ -112,7 +113,7 @@ public class GameRatingManager {
      *
      * @param gameRatings
      */
-    public void saveGameRatings(ArrayList<Game> gameRatings) {
+    public void saveGameRatings(ArrayList<Game> gameRatings) throws FileNotFoundException {
         gameDAO.saveFile(gameRatings);
     }
 }

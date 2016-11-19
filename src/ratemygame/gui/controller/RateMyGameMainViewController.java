@@ -6,6 +6,7 @@
 package ratemygame.gui.controller;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -139,8 +140,9 @@ public class RateMyGameMainViewController implements Initializable {
     /**
      * Save the data from the model to a file
      *
+     * @throws java.io.FileNotFoundException
      */
-    public void handleSaveFile() {
+    public void handleSaveFile() throws FileNotFoundException {
         gameRatingManager.saveGameRatings(gameModel.getGameRatings());
 
     }
