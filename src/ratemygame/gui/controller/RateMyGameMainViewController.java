@@ -80,7 +80,10 @@ public class RateMyGameMainViewController implements Initializable {
      *
      */
     public void handleAddGameRating() {
-        if (!txtDescription.getText().equals("") && !txtRate.getText().equals("") && txtRate.getText().matches("\\d")) {
+        if (!txtDescription.getText().equals("")
+                && !txtRate.getText().equals("")
+                //Check that input is a number between 0-5 and 0.0-5.0
+                && txtRate.getText().matches("([0-4].\\d|5.0|[0-5])")) {
             String gameDescription = txtDescription.getText();
             double gameRating = Double.parseDouble(txtRate.getText());
             Game game = gameRatingTemplate.addGameRating(gameDescription, gameRating);
