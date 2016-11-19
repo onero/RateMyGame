@@ -16,7 +16,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -47,8 +46,6 @@ public class RateMyGameMainViewController implements Initializable {
     @FXML
     private LineChart<Number, Number> chart;
     @FXML
-    private Button btnClear;
-    @FXML
     private TableView<Game> tableGameRatings;
 
     private final GameRatingTemplate gameRatingTemplate;
@@ -74,9 +71,9 @@ public class RateMyGameMainViewController implements Initializable {
         tableDescription.setCellValueFactory(new PropertyValueFactory<>("title"));
         tableRate.setCellValueFactory(new PropertyValueFactory<>("rating"));
         tableGameRatings.setItems(ratingList);
-
-        //
+        getMeanRatings();
         updateLineChart();
+
     }
 
     /**
@@ -169,6 +166,7 @@ public class RateMyGameMainViewController implements Initializable {
         File selectedFile = chooser.showOpenDialog(new Stage());
         gameModel.loadSavedGameRatings(gameRatingManager.readFile(selectedFile));
         getMeanRatings();
+        updateLineChart();
     }
 
     /**

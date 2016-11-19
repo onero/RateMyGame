@@ -19,6 +19,7 @@ import ratemygame.be.Game;
 public class GameDAO {
 
     private static final String SPLIT_STRING = ",";
+    public static final String DEFAULT_DIRECTORY = "src/ratemygame/assets";
 
     /**
      * Reads from the file parsed and returns the data as an ArrayList
@@ -62,6 +63,8 @@ public class GameDAO {
         FileChooser.ExtensionFilter txtFilter = new FileChooser.ExtensionFilter("Text document (*.txt)", "*.txt");
         saveFile.getExtensionFilters().add(txtFilter);
         saveFile.setSelectedExtensionFilter(txtFilter);
+        File defaultDirectory = new File(DEFAULT_DIRECTORY);
+        saveFile.setInitialDirectory(defaultDirectory);
         //Define initial file name
         saveFile.setInitialFileName("gameRating");
         File gameRatingsFile = saveFile.showSaveDialog(new Stage());
