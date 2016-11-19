@@ -67,7 +67,7 @@ public class GameDAO {
         File gameRatingsFile = saveFile.showSaveDialog(new Stage());
         try (PrintWriter out = new PrintWriter(gameRatingsFile)) {
             for (Game gameRating : gameRatings) {
-                out.write(gameRating.getDescription() + "," + gameRating.getRating());
+                out.write(gameRating.getTitle() + "," + gameRating.getRating());
                 out.println();
             }
         } catch (FileNotFoundException fnfe) {
